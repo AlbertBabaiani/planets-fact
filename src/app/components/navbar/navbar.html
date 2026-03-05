@@ -1,3 +1,17 @@
 <nav>
   <p class="logo">THE PLANETS</p>
+
+  <button type="button" class="hamburger">
+    <img src="assets/images/shared/icon-hamburger.svg" alt="Toggle Navbar" />
+  </button>
+
+  <ul class="planet-list">
+    @for (planet of planets; track $index) {
+      <li>
+        <a [routerLink]="[planet]">
+          {{ planet | uppercase }}
+        </a>
+      </li>
+    }
+  </ul>
 </nav>
