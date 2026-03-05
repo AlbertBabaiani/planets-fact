@@ -28,17 +28,18 @@
   </button>
 </div>
 
-<div class="grid">
+<div class="grid" [@planetAnimation]="planetName()">
   <div class="planet-img">
     <img
       class="main-img"
       [src]="mainImg()"
       [alt]="mainImgAltText()"
       [class]="planetName()?.toLowerCase()"
+      [@imageTransition]="section()"
     />
 
     @if (this.section() === 'geology') {
-      <img class="surface-img" [src]="surfaceImg()" [alt]="surfaceImgAltText()" />
+      <img class="surface-img" [src]="surfaceImg()" [alt]="surfaceImgAltText()" @popUp />
     }
   </div>
 
@@ -103,7 +104,7 @@
   </div>
 </div>
 
-<div class="info-block">
+<div class="info-block" [@planetAnimation]="planetName()">
   <div class="block">
     <p class="block-title">ROTATION TIME</p>
     <p class="block-value">{{ planet()?.rotation }}</p>
