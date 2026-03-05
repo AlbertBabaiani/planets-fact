@@ -1,7 +1,8 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, DOCUMENT, effect, inject, input, signal } from '@angular/core';
 import { Planets } from '../../core/planets';
 import { Router, RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-planet-overview',
@@ -43,12 +44,27 @@ export class PlanetOverview {
   private service = inject(Planets);
   private router = inject(Router);
 
+  private titleService = inject(Title);
+  private document = inject(DOCUMENT);
+
   planetName = input.required<string>();
 
   constructor() {
     effect(() => {
-      if (!this.service.planets.includes(this.planetName())) {
+      const currentPlanet = this.planetName();
+
+      if (!this.service.planets.includes(currentPlanet)) {
         this.router.navigate(['earth']);
+        return;
+      }
+
+      const formattedName = currentPlanet.charAt(0).toUpperCase() + currentPlanet.slice(1);
+
+      this.titleService.setTitle(`${formattedName} - Planets Fact`);
+
+      const favicon = this.document.getElementById('app-favicon') as HTMLLinkElement;
+      if (favicon) {
+        favicon.href = `assets/images/planets/${currentPlanet}/planet-${currentPlanet}.svg`;
       }
     });
   }
