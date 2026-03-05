@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
-import { Planets } from './core/planets';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +12,15 @@ import { Planets } from './core/planets';
 export class App {
   protected readonly title = signal('planets-fact');
 
-  private s = inject(Planets);
+  private router = inject(Router);
+
+  bgX = signal<number>(0);
+  bgY = signal<number>(0);
+
+  constructor() {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      this.bgX.set(Math.floor(Math.random() * 100));
+      this.bgY.set(Math.floor(Math.random() * 100));
+    });
+  }
 }

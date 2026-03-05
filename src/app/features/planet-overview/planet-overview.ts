@@ -17,14 +17,9 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
 
     trigger('imageTransition', [
-      transition('* => structure', [
+      transition('* => structure, structure => *', [
         style({ opacity: 0 }),
         animate('400ms ease-in-out', style({ opacity: 1 })),
-      ]),
-
-      transition('* => *', [
-        style({ opacity: 0 }),
-        animate('400ms ease-out', style({ opacity: 1 })),
       ]),
     ]),
 
