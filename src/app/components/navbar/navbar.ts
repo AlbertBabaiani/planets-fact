@@ -1,10 +1,10 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [UpperCasePipe, RouterLink],
+  imports: [UpperCasePipe, RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
@@ -19,4 +19,6 @@ export class Navbar {
     'uranus',
     'neptune',
   ];
+
+  toggleNavbar = signal<boolean>(false);
 }

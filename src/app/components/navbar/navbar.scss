@@ -1,26 +1,16 @@
+:host {
+  --mobile-navbar-height: 6.8rem;
+}
+
 nav {
-  padding: 1.6rem 2.4rem;
+  height: var(--mobile-navbar-height);
+  padding-inline: 2.4rem;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (min-width: 768px) {
-    gap: 3.3rem;
-
-    padding: 3.2rem 5.1rem 2.7rem;
-
-    flex-direction: column;
-  }
-
-  @media (min-width: 1440px) {
-    flex-direction: row;
-    padding: 0 3.2rem;
-
-    height: 8.5rem;
-  }
 }
 
 .logo {
@@ -33,57 +23,209 @@ nav {
 }
 
 .hamburger {
-  border: none;
+  border: unset;
   background-color: transparent;
 
   cursor: pointer;
 
-  display: none;
+  transition:
+    outline 0.2s,
+    opacity 0.3s;
+
+  &:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 0.8rem;
+  }
+
+  &.opened {
+    opacity: 0.5;
+  }
 }
 
 .planet-list {
-  display: grid;
-  grid-template-columns: repeat(8, auto);
-  gap: 3.3rem;
-
   list-style: none;
+  z-index: 3;
+
+  position: fixed;
+  background-color: var(--bg-color);
+
+  top: var(--mobile-navbar-height);
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--mobile-navbar-height));
+  padding: 2.2rem 2.4rem 0;
+
+  transform: translateX(-100%);
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  li:last-child a {
+    border-bottom: unset;
+  }
 
   a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.67;
+    letter-spacing: 1.36px;
+    color: var(--white);
 
     text-decoration: none;
-    opacity: 0.75;
-    font-size: 1.1rem;
-    font-weight: bold;
-    line-height: 2.27;
-    letter-spacing: 1px;
-    color: var(--white);
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    padding-block: 2.2rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    position: relative;
 
     transition:
       outline 0.2s,
-      opacity 0.3s;
+      color 0.2s;
+
+    &::before {
+      content: '';
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--planet-color);
+      border-radius: 100vmax;
+    }
 
     &:hover {
-      opacity: 1;
+      color: var(--planet-color);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--selected-planet);
-    }
-
-    @media (min-width: 1440px) {
-      height: 100%;
+      outline: 2px solid var(--planet-color);
+      color: var(--planet-color);
     }
   }
 
-  @media (min-width: 768px) {
+  &.opened {
+    transform: translateX(0);
+  }
+}
+
+// Tablet View
+
+@media (min-width: 768px) {
+  nav {
+    height: auto;
+
+    flex-direction: column;
+
+    gap: 2.5rem;
+
+    padding-block: 3.2rem 0;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .planet-list {
+    position: static;
+    background-color: transparent;
+
+    top: unset;
+    left: unset;
     width: 100%;
+    height: auto;
+    padding: 0;
+
+    transform: unset;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    a {
+      justify-content: center;
+      font-size: 1.1rem;
+      line-height: 2.27;
+      letter-spacing: 1px;
+
+      border-bottom: unset;
+
+      color: var(--white-05);
+
+      display: flex;
+      gap: 0;
+      width: 100%;
+
+      padding-block: 1rem;
+
+      img {
+        display: none;
+      }
+
+      &::before {
+        display: none;
+      }
+
+      &:hover {
+        color: var(--planet-color);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 0px;
+
+        background-color: var(--planet-color);
+
+        transition: height 0.2s;
+      }
+
+      &.active {
+        color: var(--planet-color);
+
+        &::after {
+          height: 4px;
+        }
+      }
+    }
+  }
+}
+
+// Desktop View
+
+@media (min-width: 1440px) {
+  nav {
+    height: 8.5rem;
+    flex-direction: row;
+    gap: 0;
+    padding: 0 3.2rem;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
   }
 
-  @media (min-width: 1440px) {
+  .planet-list {
     height: 100%;
-    width: auto;
+    gap: 3.3rem;
+
+    a {
+      height: 100%;
+      padding: 0;
+
+      &::after {
+        content: '';
+        position: absolute;
+
+        bottom: unset;
+        top: 0;
+      }
+    }
   }
 }
