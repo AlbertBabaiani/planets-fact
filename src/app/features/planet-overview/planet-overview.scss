@@ -28,6 +28,12 @@
   grid-template-columns: 1fr;
   align-items: center;
 
+  gap: 3rem;
+
+  @media (min-width: 768px) {
+    gap: 0rem;
+  }
+
   @media (min-width: 1440px) {
     grid-template-columns: 1fr 35rem;
   }
