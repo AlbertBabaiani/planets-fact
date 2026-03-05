@@ -2,15 +2,37 @@
   class="mobile-panel"
   [style]="{ '--selected-planet': `var(--${planet()?.name?.toLowerCase()}` }"
 >
-  <button type="button" class="active">OVERVIEW</button>
-  <button type="button">STRUCTURE</button>
-  <button type="button">SURFACE</button>
+  <button
+    type="button"
+    (click)="section.set('overview')"
+    [class.selected]="section() === 'overview'"
+  >
+    OVERVIEW
+  </button>
+  <button
+    type="button"
+    (click)="section.set('structure')"
+    [class.selected]="section() === 'structure'"
+  >
+    STRUCTURE
+  </button>
+  <button type="button" (click)="section.set('geology')" [class.selected]="section() === 'geology'">
+    SURFACE
+  </button>
 </div>
 
 <div class="grid">
-  <div class="planet-img" [class]="planetName()?.toLowerCase()">
-    <img src="assets/images/planets/{{ planetName() }}/planet-{{ planetName() }}.svg" alt="" />
-    <!-- Todo: Add Alt Text -->
+  <div class="planet-img">
+    <img
+      class="main-img"
+      [src]="getMainImg()"
+      [alt]="getAltText()"
+      [class]="planetName()?.toLowerCase()"
+    />
+
+    @if (this.section() === 'geology') {
+      <img class="surface-img" [src]="getSurfaceImg()" alt="" />
+    }
   </div>
 
   <div
@@ -21,14 +43,12 @@
       <h1>{{ planet()?.name }}</h1>
 
       <p class="overview">
-        {{ planet()?.overview?.content }}
+        {{ getTextContent() }}
       </p>
-
-      <!-- Todo: Add Link -->
 
       <p class="source">
         Source:
-        <a [href]="''" target="_blank"
+        <a [href]="getWikipediaLink()" target="_blank"
           >Wikipedia
 
           <img src="assets/images/shared/icon-source.svg" alt="See more" />
@@ -38,21 +58,33 @@
 
     <ul class="tabs">
       <li class="section-selector">
-        <button type="button" class="selected">
+        <button
+          type="button"
+          (click)="section.set('overview')"
+          [class.selected]="section() === 'overview'"
+        >
           <span>01</span>
           OVERVIEW
         </button>
       </li>
 
       <li class="section-selector">
-        <button type="button">
+        <button
+          type="button"
+          (click)="section.set('structure')"
+          [class.selected]="section() === 'structure'"
+        >
           <span>02</span>
           INTERNAL STRUCTURE
         </button>
       </li>
 
       <li class="section-selector">
-        <button type="button">
+        <button
+          type="button"
+          (click)="section.set('geology')"
+          [class.selected]="section() === 'geology'"
+        >
           <span>03</span>
           SURFACE GEOLOGY
         </button>
