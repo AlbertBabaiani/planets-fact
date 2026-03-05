@@ -1,6 +1,6 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { Planets } from '../../core/planets';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-planet-overview',
@@ -10,8 +10,17 @@ import { RouterLink } from '@angular/router';
 })
 export class PlanetOverview {
   private service = inject(Planets);
+  private router = inject(Router);
 
   planetName = input.required<string>();
+
+  constructor() {
+    effect(() => {
+      if (!this.service.planets.includes(this.planetName())) {
+        this.router.navigate(['earth']);
+      }
+    });
+  }
 
   section = signal<'overview' | 'structure' | 'geology'>('overview');
 
