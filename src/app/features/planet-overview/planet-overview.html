@@ -1,0 +1,45 @@
+<div class="planet-img">
+  <!-- <img src="assets/images/{{ planetName() }}/planet-{{ planetName() }}.svg" alt="" /> -->
+  <!-- Todo: Add Alt Text -->
+</div>
+
+<div class="content">
+  <h1>{{ planet()?.name }}</h1>
+
+  <p class="overview">
+    {{ planet()?.overview?.content }}
+  </p>
+
+  <!-- Todo: Add Link -->
+
+  <p class="source">
+    Source:
+    <a [href]="''" target="_blank"
+      >Wikipedia
+
+      <img src="assets/images/shared/icon-source.svg" alt="See more" />
+    </a>
+  </p>
+</div>
+
+<div class="info-block">
+  <div class="block">
+    <p class="block-title">ROTATION TIME</p>
+    <p class="block-value">{{ planet()?.rotation }}</p>
+  </div>
+
+  <div class="block">
+    <p class="block-title">REVOLUTION TIME</p>
+    <p class="block-value">{{ planet()?.revolution }}</p>
+  </div>
+
+  <div class="block">
+    <p class="block-title">RADIUS</p>
+    <p class="block-value">{{ planet()?.radius }}</p>
+  </div>
+
+  <div class="block">
+    <p class="block-title">AVERAGE TEMP.</p>
+    <p class="block-value">{{ planet()?.temperature }}</p>
+  </div>
+</div>
