@@ -4,6 +4,7 @@
 >
   <button
     type="button"
+    role="tab"
     (click)="section.set('overview')"
     [class.selected]="section() === 'overview'"
   >
@@ -11,12 +12,18 @@
   </button>
   <button
     type="button"
+    role="tab"
     (click)="section.set('structure')"
     [class.selected]="section() === 'structure'"
   >
     STRUCTURE
   </button>
-  <button type="button" (click)="section.set('geology')" [class.selected]="section() === 'geology'">
+  <button
+    type="button"
+    role="tab"
+    (click)="section.set('geology')"
+    [class.selected]="section() === 'geology'"
+  >
     SURFACE
   </button>
 </div>
@@ -37,7 +44,7 @@
 
   <div
     class="planet-info"
-    [style]="{ '--selected-planet': `var(--${planet()?.name?.toLowerCase()}` }"
+    [style]="{ '--selected-planet': `var(--${planet()?.name?.toLowerCase()})` }"
   >
     <div class="content">
       <h1>{{ planet()?.name }}</h1>
@@ -60,6 +67,7 @@
       <li class="section-selector">
         <button
           type="button"
+          role="tab"
           (click)="section.set('overview')"
           [class.selected]="section() === 'overview'"
         >
@@ -71,6 +79,7 @@
       <li class="section-selector">
         <button
           type="button"
+          role="tab"
           (click)="section.set('structure')"
           [class.selected]="section() === 'structure'"
         >
@@ -82,6 +91,7 @@
       <li class="section-selector">
         <button
           type="button"
+          role="tab"
           (click)="section.set('geology')"
           [class.selected]="section() === 'geology'"
         >
