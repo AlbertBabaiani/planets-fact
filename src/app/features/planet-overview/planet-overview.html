@@ -1,25 +1,64 @@
-<div class="planet-img">
-  <!-- <img src="assets/images/{{ planetName() }}/planet-{{ planetName() }}.svg" alt="" /> -->
-  <!-- Todo: Add Alt Text -->
+<div
+  class="mobile-panel"
+  [style]="{ '--selected-planet': `var(--${planet()?.name?.toLowerCase()}` }"
+>
+  <button type="button" class="active">OVERVIEW</button>
+  <button type="button">STRUCTURE</button>
+  <button type="button">SURFACE</button>
 </div>
 
-<div class="content">
-  <h1>{{ planet()?.name }}</h1>
+<div class="grid">
+  <div class="planet-img" [class]="planetName()?.toLowerCase()">
+    <img src="assets/images/planets/{{ planetName() }}/planet-{{ planetName() }}.svg" alt="" />
+    <!-- Todo: Add Alt Text -->
+  </div>
 
-  <p class="overview">
-    {{ planet()?.overview?.content }}
-  </p>
+  <div
+    class="planet-info"
+    [style]="{ '--selected-planet': `var(--${planet()?.name?.toLowerCase()}` }"
+  >
+    <div class="content">
+      <h1>{{ planet()?.name }}</h1>
 
-  <!-- Todo: Add Link -->
+      <p class="overview">
+        {{ planet()?.overview?.content }}
+      </p>
 
-  <p class="source">
-    Source:
-    <a [href]="''" target="_blank"
-      >Wikipedia
+      <!-- Todo: Add Link -->
 
-      <img src="assets/images/shared/icon-source.svg" alt="See more" />
-    </a>
-  </p>
+      <p class="source">
+        Source:
+        <a [href]="''" target="_blank"
+          >Wikipedia
+
+          <img src="assets/images/shared/icon-source.svg" alt="See more" />
+        </a>
+      </p>
+    </div>
+
+    <ul class="tabs">
+      <li class="section-selector">
+        <button type="button" class="selected">
+          <span>01</span>
+          OVERVIEW
+        </button>
+      </li>
+
+      <li class="section-selector">
+        <button type="button">
+          <span>02</span>
+          INTERNAL STRUCTURE
+        </button>
+      </li>
+
+      <li class="section-selector">
+        <button type="button">
+          <span>03</span>
+          SURFACE GEOLOGY
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="info-block">

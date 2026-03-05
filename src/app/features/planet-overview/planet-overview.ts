@@ -1,9 +1,10 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Planets } from '../../core/planets';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-planet-overview',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './planet-overview.html',
   styleUrl: './planet-overview.scss',
 })
