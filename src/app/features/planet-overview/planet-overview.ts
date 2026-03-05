@@ -34,7 +34,7 @@ export class PlanetOverview {
 
   // Helpers Start
 
-  getMainImg(): string {
+  mainImg = computed(() => {
     let link = `assets/images/planets/${this.planetName()}/`;
 
     switch (this.section()) {
@@ -43,23 +43,26 @@ export class PlanetOverview {
       default:
         return link + `planet-${this.planetName()}.svg`;
     }
-  }
+  });
 
-  getSurfaceImg(): string {
-    return `assets/images/planets/${this.planetName().toLowerCase()}/geology-${this.planetName().toLowerCase()}.png`;
-  }
+  surfaceImg = computed(
+    () =>
+      `assets/images/planets/${this.planetName().toLowerCase()}/geology-${this.planetName().toLowerCase()}.png`,
+  );
 
-  getAltText(): string {
-    return `Image of ${this.planetName()[0].toUpperCase() + this.planetName().slice(1).toLowerCase()} ${this.section()}.`;
-  }
+  mainImgAltText = computed(
+    () =>
+      `Image of ${this.planetName()[0].toUpperCase() + this.planetName().slice(1).toLowerCase()} ${this.section()}.`,
+  );
 
-  getTextContent(): string {
-    return this.planet()?.[this.section()]?.content;
-  }
+  surfaceImgAltText = computed(
+    () =>
+      `Surface image of ${this.planetName()[0].toUpperCase() + this.planetName().slice(1).toLowerCase()} ${this.section()}.`,
+  );
 
-  getWikipediaLink(): string {
-    return this.planet()?.[this.section()]?.source;
-  }
+  textContent = computed(() => this.planet()?.[this.section()]?.content);
+
+  wikipediaLink = computed(() => this.planet()?.[this.section()]?.source);
 
   // Helpers End
 }

@@ -25,13 +25,13 @@
   <div class="planet-img">
     <img
       class="main-img"
-      [src]="getMainImg()"
-      [alt]="getAltText()"
+      [src]="mainImg()"
+      [alt]="mainImgAltText()"
       [class]="planetName()?.toLowerCase()"
     />
 
     @if (this.section() === 'geology') {
-      <img class="surface-img" [src]="getSurfaceImg()" alt="" />
+      <img class="surface-img" [src]="surfaceImg()" [alt]="surfaceImgAltText()" />
     }
   </div>
 
@@ -43,12 +43,12 @@
       <h1>{{ planet()?.name }}</h1>
 
       <p class="overview">
-        {{ getTextContent() }}
+        {{ textContent() }}
       </p>
 
       <p class="source">
         Source:
-        <a [href]="getWikipediaLink()" target="_blank"
+        <a [href]="wikipediaLink()" target="_blank"
           >Wikipedia
 
           <img src="assets/images/shared/icon-source.svg" alt="See more" />
