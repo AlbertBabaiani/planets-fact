@@ -1,3 +1,10 @@
+@if (isLoading()) {
+  <div class="loader-overlay" @fadeOut>
+    <div class="orbit-spinner"></div>
+    <p class="loading-text">MAPPING THE GALAXY...</p>
+  </div>
+}
+
 <div class="container" [style]="{ '--bg-x': bgX() + '%', '--bg-y': bgY() + '%' }">
   <app-navbar />
 

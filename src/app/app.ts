@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { filter } from 'rxjs';
+import { Planets } from './core/planets';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ import { filter } from 'rxjs';
 })
 export class App {
   protected readonly title = signal('planets-fact');
+
+  private service = inject(Planets);
+  isLoading = this.service.isLoading;
 
   private router = inject(Router);
 
