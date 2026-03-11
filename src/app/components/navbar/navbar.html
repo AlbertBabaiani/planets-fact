@@ -11,7 +11,7 @@
       <img src="assets/images/shared/icon-hamburger.svg" alt="Toggle Navbar" />
     </button>
 
-    <ul class="planet-list" [class.opened]="toggleNavbar()" [attr.inert]="!toggleNavbar() ? true : null">
+    <ul class="planet-list" [class.opened]="toggleNavbar()" [attr.inert]="toggleNavbar() ? true : null">
       @for (planet of planets; track $index) {
         <li>
           <a
