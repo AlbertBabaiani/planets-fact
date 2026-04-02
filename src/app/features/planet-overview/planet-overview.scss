@@ -387,6 +387,8 @@ h1 {
   grid-template-columns: 1fr;
   gap: 0.8rem;
 
+  align-items: end;
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.1rem;
